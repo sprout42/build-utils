@@ -45,7 +45,7 @@ def info(msg, code=''):
         ret = msg
     else:
         ret = '%s: %s' % (code, msg)
-    print ret
+    print(ret)
 
 
 def _make_dir(path):

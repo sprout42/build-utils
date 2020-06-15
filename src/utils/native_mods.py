@@ -42,13 +42,13 @@ def make_modules(src_path, include_path, lib_path=None):
     if os.name == 'nt':
         include_dirs = build.make_source_list(
             include_path,
-            ['cairo', 'pycairo'])
+            ['cairo', 'py3cairo'])
     elif platform.system() == 'Darwin':
-        include_dirs = pkgconfig.get_pkg_includes(['pycairo', 'cairo'])
-        cairo_libs = pkgconfig.get_pkg_libs(['pycairo', 'cairo'])
+        include_dirs = pkgconfig.get_pkg_includes(['py3cairo', 'cairo'])
+        cairo_libs = pkgconfig.get_pkg_libs(['py3cairo', 'cairo'])
     elif os.name == 'posix':
-        include_dirs = pkgconfig.get_pkg_includes(['pycairo', ])
-        cairo_libs = pkgconfig.get_pkg_libs(['pycairo', ])
+        include_dirs = pkgconfig.get_pkg_includes(['py3cairo', ])
+        cairo_libs = pkgconfig.get_pkg_libs(['py3cairo', ])
 
     cairo_module = Extension(
         'uc2.libcairo._libcairo',
@@ -94,14 +94,14 @@ def make_modules(src_path, include_path, lib_path=None):
 
     if os.name == 'nt':
         include_dirs = build.make_source_list(
-            include_path, ['cairo', 'pycairo', 'pango-1.0', 'glib-2.0'])
+            include_path, ['cairo', 'py3cairo', 'pango-1.0', 'glib-2.0'])
     elif platform.system() == 'Darwin':
         include_dirs = pkgconfig.get_pkg_includes(['pangocairo', 'pango',
-                                                   'pycairo', 'cairo'])
-        pango_libs = pkgconfig.get_pkg_libs(['pangocairo', 'pango', 'pycairo',
+                                                   'py3cairo', 'cairo'])
+        pango_libs = pkgconfig.get_pkg_libs(['pangocairo', 'pango', 'py3cairo',
                                              'cairo'])
     elif os.name == 'posix':
-        include_dirs = pkgconfig.get_pkg_includes(['pangocairo', 'pycairo'])
+        include_dirs = pkgconfig.get_pkg_includes(['pangocairo', 'py3cairo'])
         pango_libs = pkgconfig.get_pkg_libs(['pangocairo', ])
 
     pango_module = Extension(
@@ -125,6 +125,10 @@ def make_modules(src_path, include_path, lib_path=None):
         libimg_libraries = pkgconfig.get_pkg_libs(['MagickWand', ])
         include_dirs = pkgconfig.get_pkg_includes(['MagickWand', ])
         compile_args = pkgconfig.get_pkg_cflags(['MagickWand', ])
+        #im_ver = pkgconfig.get_pkg_version('GraphicsMagickWand')[0]
+        #libimg_libraries = pkgconfig.get_pkg_libs(['GraphicsMagickWand', ])
+        #include_dirs = pkgconfig.get_pkg_includes(['GraphicsMagickWand', ])
+        #compile_args = pkgconfig.get_pkg_cflags(['GraphicsMagickWand', ])
 
     libimg_src = os.path.join(src_path, 'uc2', 'libimg')
     files = build.make_source_list(libimg_src, ['_libimg%s.c' % im_ver, ])

@@ -82,7 +82,8 @@ MARKERS = {
 
 class SystemFacts(object):
     def __init__(self):
-        self.family, self.version = platform.dist()[:2]
+        #self.family, self.version = platform.dist()[:2]
+        self.family, _, self.version = platform.uname()[:3]
 
         # Workaround for Leap 15.0
         if not self.family and not self.version:
